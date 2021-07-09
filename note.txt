@@ -1,0 +1,67 @@
+to create serverless project 
+sls create --template aws-nodejs --path myServerlessProject 
+
+
+
+sls offline start 
+sls dynamodb install
+sls dynamodb migrate
+
+
+
+rm -rf node_modules
+rm package-lock.json
+npm cache clean --force
+npm i -D serverless-dynamodb-local@0.2.35
+
+
+
+to create dynamodb 
+
+var params = {
+  AttributeDefinitions: [
+    {
+      AttributeName: 'id',
+      AttributeType: 'N'
+    },
+    {
+      AttributeName: 'title',
+      AttributeType: 'S'
+    }, 
+     {
+      AttributeName: 'note',
+      AttributeType: 'S'
+    }, 
+     {
+      AttributeName: 'due_date',
+      AttributeType: 'S'
+    }
+  ],
+  KeySchema: [
+    {
+      AttributeName: 'id',
+      KeyType: 'HASH'
+    },
+    {
+      AttributeName: 'title',
+      KeyType: 'RANGE'
+    }
+  ],
+  ProvisionedThroughput: {
+    ReadCapacityUnits: 1,
+    WriteCapacityUnits: 1
+  },
+  TableName: 'TODO_LIST',
+  StreamSpecification: {
+    StreamEnabled: false
+  }
+};
+
+// Call DynamoDB to create the table
+dynamoDb.createTable(params, function(err, data) {
+  if (err) {
+    console.log("Error", err);
+  } else {
+    console.log("Table Created", data);
+  }
+});

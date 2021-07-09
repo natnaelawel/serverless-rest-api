@@ -1,0 +1,1 @@
+{"version":"1.0.0","name":"sample-serverless-project","dependencies":{"aws-sdk":{"version":"2.939.0"},"body-parser":{"version":"1.19.0"},"express":{"version":"4.17.1"},"joi":{"version":"17.4.0"},"serverless-http":{"version":"2.7.0"}}}
